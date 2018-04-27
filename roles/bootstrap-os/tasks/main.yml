@@ -14,7 +14,7 @@
 - import_tasks: bootstrap-opensuse.yml
   when: bootstrap_os == "opensuse"
 
-- import_tasks: setup-pipelining.yml
+# - import_tasks: setup-pipelining.yml
 
 - name: check if atomic host
   stat:
