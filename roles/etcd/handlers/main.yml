@@ -34,6 +34,12 @@
     state: restarted
   when: is_etcd_master
 
+- debug:
+    msg:
+      - "{{"https://{% if is_etcd_master %}{{ etcd_address }}{% else %}127.0.0.1{% endif %}:2379/health"}}"
+      - "{{ etcd_cert_dir }}/member-{{ inventory_hostname }}.pem"
+      - "{{ etcd_cert_dir }}/member-{{ inventory_hostname }}-key.pem"
+
 - name: wait for etcd up
   uri:
     url: "https://{% if is_etcd_master %}{{ etcd_address }}{% else %}127.0.0.1{% endif %}:2379/health"
