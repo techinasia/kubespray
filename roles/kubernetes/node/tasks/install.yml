@@ -14,6 +14,12 @@
   tags:
     - facts
 
+- name: Create symbolic link /etc/kubenertes/pki -> /etc/kubenertes/ssl
+  file:
+    src: /etc/kubernetes/ssl
+    dest: /etc/kubernetes/pki
+    state: link
+
 - name: Set kubelet deployment to host if kubeadm is enabled
   set_fact:
     kubelet_deployment_type: host
