@@ -22,11 +22,13 @@
   delegate_to: "{{ groups['kube-master'][0] }}"
   run_once: true
 
+- debug: msg="{{ bin_dir }}/kubeadm token create"
 - name: Create kubeadm token for joining nodes with 24h expiration (default)
   command: "{{ bin_dir }}/kubeadm token create"
   run_once: true
   register: temp_token
   delegate_to: "{{ groups['kube-master'][0] }}"
+- debug: msg="{{temp_token.stdout}}"
 
 - name: Create kubeadm client config
   template:
