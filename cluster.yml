@@ -30,6 +30,10 @@
 
 - hosts: k8s-cluster:etcd:calico-rr
   any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
+  pre_tasks:
+    - name: get apt-key.gpg for packages.cloud.google.com
+      shell: >
+        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
   roles:
     - { role: kubespray-defaults}
     - { role: kubernetes/preinstall, tags: preinstall }
