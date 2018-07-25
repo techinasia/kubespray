@@ -2,8 +2,14 @@
 - name: restart kubelet
   command: /bin/true
   notify:
+    - Kubelet | remove 10-kubeadm.conf
     - Kubelet | reload systemd
     - Kubelet | reload kubelet
+
+- name: Kubelet | remove 10-kubeadm.conf
+  file:
+    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    state: absent
 
 - name: Kubelet | reload systemd
   command: systemctl daemon-reload
