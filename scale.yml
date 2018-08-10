@@ -11,6 +11,10 @@
   gather_facts: false
   vars:
     ansible_ssh_pipelining: false
+  pre_tasks:
+    - name: get apt-key.gpg for packages.cloud.google.com
+      shell: >
+        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
   roles:
     - { role: kubespray-defaults}
     - { role: bootstrap-os, tags: bootstrap-os}
