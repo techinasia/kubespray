@@ -39,3 +39,8 @@ dockerproject_rh_repo_base_url: 'https://yum.dockerproject.org/repo/main/centos/
 dockerproject_rh_repo_gpgkey: 'https://yum.dockerproject.org/gpg'
 dockerproject_apt_repo_base_url: 'https://apt.dockerproject.org/repo'
 dockerproject_apt_repo_gpgkey: 'https://apt.dockerproject.org/gpg'
+
+# TechinAsia custom parameter variable
+docker_aws_ec2:
+  ubuntu:
+    ami_id: ami-065fb8691329f87f6

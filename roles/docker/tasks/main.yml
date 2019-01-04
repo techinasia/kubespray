@@ -118,6 +118,14 @@
   notify: restart docker
   when: not (ansible_os_family in ["CoreOS", "Container Linux by CoreOS"] or is_atomic) and (docker_package_info.pkgs|length > 0)
 
+- name: if ec2metadata command exists
+  stat:
+    path: /usr/bin/ec2metadata
+  register: ec2metadata_stat_result
+
+- include: aws-ubuntu-ec2-setup.yml
+  when: ec2metadata_stat_result.stat.exists == True
+
 - name: ensure service is started if docker packages are already present
   service:
     name: docker

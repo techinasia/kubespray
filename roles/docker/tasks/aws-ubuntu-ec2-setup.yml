@@ -1,0 +1,28 @@
+---
+
+- name: ec2metadata | ami-id
+  shell: >
+    ec2metadata | grep -E '^ami\-id' | awk '{print $2}'
+  register: ansible_ec2metadata
+
+- debug: msg="{{ansible_ec2metadata.stdout}}"
+
+- name: create /etc/systemd/system/docker.service.d/docker.conf
+  copy:
+    content: |
+      [Service]
+      ExecStart=
+      ExecStart=/usr/bin/dockerd
+    dest: /etc/systemd/system/docker.service.d/docker.conf
+    owner: root
+    group: root
+  when: ansible_ec2metadata.stdout == docker_aws_ec2.ubuntu.ami_id
+- name: create override /etc/docker/daemon.json
+  copy:
+    content: |
+      {"storage-driver": "overlay2"}
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: u+rw,g-r,o-r
+  when: ansible_ec2metadata.stdout == docker_aws_ec2.ubuntu.ami_id
