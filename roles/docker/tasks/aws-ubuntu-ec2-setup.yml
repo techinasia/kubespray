@@ -7,16 +7,17 @@
 
 - debug: msg="{{ansible_ec2metadata.stdout}}"
 
-- name: create /etc/systemd/system/docker.service.d/docker.conf
-  copy:
-    content: |
-      [Service]
-      ExecStart=
-      ExecStart=/usr/bin/dockerd
-    dest: /etc/systemd/system/docker.service.d/docker.conf
-    owner: root
-    group: root
-  when: ansible_ec2metadata.stdout == docker_aws_ec2.ubuntu.ami_id
+# - name: create /etc/systemd/system/docker.service.d/docker.conf
+#   copy:
+#     content: |
+#       [Service]
+#       ExecStart=
+#       ExecStart=/usr/bin/dockerd
+#     dest: /etc/systemd/system/docker.service.d/docker.conf
+#     owner: root
+#     group: root
+#   when: ansible_ec2metadata.stdout == docker_aws_ec2.ubuntu.ami_id
+
 - name: create override /etc/docker/daemon.json
   copy:
     content: |
