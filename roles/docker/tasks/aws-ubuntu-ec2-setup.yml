@@ -26,4 +26,3 @@
     owner: root
     group: root
     mode: u+rw,g-r,o-r
-  when: ansible_ec2metadata.stdout == docker_aws_ec2.ubuntu.ami_id
