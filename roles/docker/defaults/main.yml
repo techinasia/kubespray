@@ -35,6 +35,7 @@ docker_ubuntu_repo_gpgkey: 'https://download.docker.com/linux/ubuntu/gpg'
 docker_debian_repo_base_url: "https://download.docker.com/linux/debian"
 docker_debian_repo_gpgkey: 'https://download.docker.com/linux/debian/gpg'
 # dockerproject repo
+# # Deprecated March 31st 2020.
 # dockerproject_rh_repo_base_url: 'https://yum.dockerproject.org/repo/main/centos/7'
 # dockerproject_rh_repo_gpgkey: 'https://yum.dockerproject.org/gpg'
 # dockerproject_apt_repo_base_url: 'https://apt.dockerproject.org/repo'
@@ -42,5 +43,5 @@ docker_debian_repo_gpgkey: 'https://download.docker.com/linux/debian/gpg'
 
 dockerproject_rh_repo_base_url: 'https://download.docker.com/repo/main/centos/7'
 dockerproject_rh_repo_gpgkey: 'https://download.docker.com/gpg'
-dockerproject_apt_repo_base_url: 'https://download.docker.com/repo'
-dockerproject_apt_repo_gpgkey: 'https://download.docker.com/gpg'
+dockerproject_apt_repo_base_url: 'https://download.docker.com/linux/ubuntu'
+dockerproject_apt_repo_gpgkey: 'https://download.docker.com/linux/ubuntu/gpg'
