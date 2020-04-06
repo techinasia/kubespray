@@ -61,26 +61,29 @@
   with_items: "{{ docker_repo_info.repos }}"
   when: not (ansible_os_family in ["CoreOS", "Container Linux by CoreOS", "RedHat", "Suse"] or is_atomic) and (docker_repo_info.repos|length > 0)
 
-- name: ensure docker-engine repository public key is installed
-  action: "{{ dockerproject_repo_key_info.pkg_key }}"
-  args:
-    id: "{{item}}"
-    url: "{{dockerproject_repo_key_info.url}}"
-    state: present
-  register: keyserver_task_result
-  until: keyserver_task_result|succeeded
-  retries: 4
-  delay: "{{ retry_stagger | random + 3 }}"
-  with_items: "{{ dockerproject_repo_key_info.repo_keys }}"
-  when: not (ansible_os_family in ["CoreOS", "Container Linux by CoreOS", "RedHat", "Suse"] or is_atomic)
+- debug:
+    msg: "{{dockerproject_repo_key_info.url}}"
 
-- name: ensure docker-engine repository is enabled
-  action: "{{ dockerproject_repo_info.pkg_repo }}"
-  args:
-    repo: "{{item}}"
-    state: present
-  with_items: "{{ dockerproject_repo_info.repos }}"
-  when: not (ansible_os_family in ["CoreOS", "Container Linux by CoreOS", "RedHat", "Suse"] or is_atomic) and (dockerproject_repo_info.repos|length > 0)
+# - name: ensure docker-engine repository public key is installed
+#   action: "{{ dockerproject_repo_key_info.pkg_key }}"
+#   args:
+#     id: "{{item}}"
+#     url: "{{dockerproject_repo_key_info.url}}"
+#     state: present
+#   register: keyserver_task_result
+#   until: keyserver_task_result|succeeded
+#   retries: 4
+#   delay: "{{ retry_stagger | random + 3 }}"
+#   with_items: "{{ dockerproject_repo_key_info.repo_keys }}"
+#   when: not (ansible_os_family in ["CoreOS", "Container Linux by CoreOS", "RedHat", "Suse"] or is_atomic)
+
+# - name: ensure docker-engine repository is enabled
+#   action: "{{ dockerproject_repo_info.pkg_repo }}"
+#   args:
+#     repo: "{{item}}"
+#     state: present
+#   with_items: "{{ dockerproject_repo_info.repos }}"
+#   when: not (ansible_os_family in ["CoreOS", "Container Linux by CoreOS", "RedHat", "Suse"] or is_atomic) and (dockerproject_repo_info.repos|length > 0)
 
 - name: Configure docker repository on RedHat/CentOS
   template:
